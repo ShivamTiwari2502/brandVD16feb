@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import logoX from "../src/assets/logo.png";
 const BrandVDWebsite = () => {
   const [scrolled, setScrolled] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
@@ -91,29 +91,17 @@ const BrandVDWebsite = () => {
     return getResponsiveStyle(large, medium, small);
   };
 
-  // Data arrays
+  // Data arrays - brands for marquee (text only)
   const brands = [
     'Housing.com', 'Havells', 'Reebok', 'Aurelia', 'Ola', 'NSDC', 
     'HDFC Bank', 'Apollo Hospitals', 'Jaypee Hospital', 'Delhi Dynamos FC',
     'Samsung', 'DLF', 'Godrej', 'Mahindra', 'PNB MetLife', 'CBRE'
   ];
 
-  // Refined color palette - Navy blue and white
-  const colors = {
-    primary: '#0A2540',      // Navy Blue
-    secondary: '#1E3A5F',    // Medium Navy
-    accent: '#3B82F6',       // Bright Blue
-    gold: '#F59E0B',         // Gold accent
-    lightBlue: '#DBEAFE',    // Light blue
-    white: '#FFFFFF',
-    offWhite: '#F9FAFB',
-    text: '#1F2937',
-    textLight: '#6B7280'
-  };
-
+  // More vibrant colors (5% brighter)
   const serviceColors = [
-    '#3B82F6', '#10B981', '#8B5CF6',
-    '#F59E0B', '#EF4444', '#06B6D4'
+    '#4F8EFF', '#15D690', '#9D6FFF',
+    '#FFB020', '#FF5757', '#18C7E8'
   ];
 
   const services = [
@@ -234,12 +222,15 @@ const BrandVDWebsite = () => {
       padding: '1rem 5%',
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
     },
-    logo: {
-      fontFamily: "'Playfair Display', serif",
-      fontSize: isMobile ? '1.4rem' : '1.8rem',
-      fontWeight: 900,
-      color: '#0A2540',
-      letterSpacing: '2px'
+    logoContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      cursor: 'pointer'
+    },
+    logoImage: {
+      height: isMobile ? '35px' : '45px',
+      width: 'auto',
+      transition: 'all 0.3s ease'
     },
     mobileMenuButton: {
       display: isMobile ? 'block' : 'none',
@@ -260,7 +251,7 @@ const BrandVDWebsite = () => {
     hamburgerLine: {
       width: '100%',
       height: '3px',
-      background: '#0A2540',
+      background: '#0D2F55',
       borderRadius: '3px',
       transition: 'all 0.3s ease'
     },
@@ -285,7 +276,7 @@ const BrandVDWebsite = () => {
       listStyle: 'none'
     },
     navLink: {
-      color: '#0A2540',
+      color: '#0D2F55',
       textDecoration: 'none',
       fontWeight: 500,
       fontSize: isMobile ? '1.2rem' : '0.95rem',
@@ -295,13 +286,26 @@ const BrandVDWebsite = () => {
     },
     hero: {
       height: '100vh',
-      background: 'linear-gradient(135deg, #0A2540 0%, #1E3A5F 100%)',
+      background: 'linear-gradient(135deg, #0D2F55 0%, #234366 100%)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       position: 'relative',
       overflow: 'hidden',
       padding: '0 1rem'
+    },
+    heroBrandWatermark: {
+      position: 'absolute',
+      top: '15%',
+      right: isMobile ? '-10%' : '5%',
+      fontSize: isMobile ? '8rem' : '12rem',
+      fontFamily: "'Playfair Display', serif",
+      fontWeight: 900,
+      color: 'rgba(255, 255, 255, 0.03)',
+      transform: 'rotate(-10deg)',
+      userSelect: 'none',
+      pointerEvents: 'none',
+      zIndex: 0
     },
     heroContent: {
       textAlign: 'center',
@@ -326,19 +330,19 @@ const BrandVDWebsite = () => {
       letterSpacing: getResponsiveStyle('3px', '2px', '2px'),
       marginBottom: '3rem',
       opacity: 0.9,
-      color: '#DBEAFE'
+      color: '#E5F0FF'
     },
     ctaButton: {
       display: 'inline-block',
       padding: getResponsiveStyle('1.2rem 3rem', '1.1rem 2.5rem', '1rem 2rem'),
-      background: '#3B82F6',
+      background: '#4F8EFF',
       color: 'white',
       textDecoration: 'none',
       fontWeight: 600,
       fontSize: getResponsiveStyle('1rem', '0.95rem', '0.9rem'),
       borderRadius: '8px',
       transition: 'all 0.3s ease',
-      boxShadow: '0 4px 14px rgba(59, 130, 246, 0.4)',
+      boxShadow: '0 4px 14px rgba(79, 142, 255, 0.4)',
       cursor: 'pointer',
       border: 'none'
     },
@@ -353,7 +357,7 @@ const BrandVDWebsite = () => {
       fontSize: getResponsiveStyle('3.5rem', '2.8rem', '2rem'),
       fontWeight: 900,
       marginBottom: '1rem',
-      color: '#0A2540'
+      color: '#0D2F55'
     },
     sectionSubtitle: {
       fontSize: getResponsiveStyle('1.2rem', '1.1rem', '1rem'),
@@ -375,7 +379,7 @@ const BrandVDWebsite = () => {
       fontFamily: "'Playfair Display', serif",
       fontSize: getResponsiveStyle('2rem', '1.7rem', '1.5rem'),
       marginBottom: '1.5rem',
-      color: '#0A2540'
+      color: '#0D2F55'
     },
     aboutParagraph: {
       lineHeight: 1.8,
@@ -384,11 +388,11 @@ const BrandVDWebsite = () => {
       color: '#4B5563'
     },
     aboutHighlight: {
-      background: 'linear-gradient(135deg, #0A2540 0%, #1E3A5F 100%)',
+      background: 'linear-gradient(135deg, #0D2F55 0%, #234366 100%)',
       color: 'white',
       padding: getResponsiveStyle('3rem', '2.5rem', '2rem'),
       borderRadius: '12px',
-      boxShadow: '0 10px 40px rgba(10, 37, 64, 0.15)',
+      boxShadow: '0 10px 40px rgba(13, 47, 85, 0.15)',
       border: '1px solid rgba(255, 255, 255, 0.1)'
     },
     highlightTitle: {
@@ -405,7 +409,7 @@ const BrandVDWebsite = () => {
     },
     philosophy: {
       background: '#F9FAFB',
-      color: '#0A2540',
+      color: '#0D2F55',
       textAlign: 'center',
       borderTop: '1px solid #E5E7EB',
       borderBottom: '1px solid #E5E7EB'
@@ -440,7 +444,7 @@ const BrandVDWebsite = () => {
       fontFamily: "'Playfair Display', serif",
       fontSize: getResponsiveStyle('2.5rem', '2rem', '1.8rem'),
       marginBottom: '2rem',
-      color: '#0A2540'
+      color: '#0D2F55'
     },
     vmText: {
       fontSize: '1.1rem',
@@ -471,7 +475,7 @@ const BrandVDWebsite = () => {
       fontFamily: "'Playfair Display', serif",
       fontSize: getResponsiveStyle('1.4rem', '1.3rem', '1.2rem'),
       marginBottom: '1rem',
-      color: '#0A2540',
+      color: '#0D2F55',
       fontWeight: 700
     },
     serviceList: {
@@ -486,7 +490,7 @@ const BrandVDWebsite = () => {
       position: 'relative'
     },
     edge: {
-      background: 'linear-gradient(135deg, #0A2540 0%, #1E3A5F 100%)',
+      background: 'linear-gradient(135deg, #0D2F55 0%, #234366 100%)',
       color: 'white'
     },
     edgeGrid: {
@@ -532,7 +536,7 @@ const BrandVDWebsite = () => {
       marginBottom: '2rem'
     },
     brandsMarquee: {
-      background: 'linear-gradient(135deg, #0A2540 0%, #1E3A5F 100%)',
+      background: 'linear-gradient(135deg, #0D2F55 0%, #234366 100%)',
       padding: '2.5rem 0',
       overflow: 'hidden',
       marginTop: '3rem',
@@ -542,7 +546,8 @@ const BrandVDWebsite = () => {
     brandsScroll: {
       display: 'flex',
       animation: 'scroll 40s linear infinite',
-      gap: '3rem'
+      gap: '3rem',
+      alignItems: 'center'
     },
     brandItem: {
       color: 'white',
@@ -574,12 +579,12 @@ const BrandVDWebsite = () => {
     clientName: {
       fontFamily: "'Playfair Display', serif",
       fontSize: '1.3rem',
-      color: '#0A2540',
+      color: '#0D2F55',
       fontWeight: 600
     },
     presence: {
       background: 'white',
-      color: '#0A2540',
+      color: '#0D2F55',
       textAlign: 'center'
     },
     presenceGrid: {
@@ -596,7 +601,7 @@ const BrandVDWebsite = () => {
       fontWeight: 600,
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       border: '2px solid #E5E7EB',
-      color: '#0A2540',
+      color: '#0D2F55',
       boxShadow: '0 2px 10px rgba(0, 0, 0, 0.04)',
       cursor: 'pointer'
     },
@@ -627,20 +632,27 @@ const BrandVDWebsite = () => {
       fontSize: '1.2rem',
       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)',
-      borderLeft: '4px solid #3B82F6',
+      borderLeft: '4px solid #4F8EFF',
       cursor: 'pointer'
     },
     contactLink: {
-      color: '#3B82F6',
+      color: '#4F8EFF',
       textDecoration: 'none',
-      fontWeight: 600
+      fontWeight: 600,
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '0.5rem'
     },
     footer: {
-      background: 'linear-gradient(135deg, #0A2540 0%, #1E3A5F 100%)',
+      background: 'linear-gradient(135deg, #0D2F55 0%, #234366 100%)',
       color: 'white',
       textAlign: 'center',
       padding: '3rem',
       borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+    },
+    footerContent: {
+      maxWidth: '1200px',
+      margin: '0 auto'
     }
   };
 
@@ -690,9 +702,8 @@ const BrandVDWebsite = () => {
           transform: translateY(0) !important;
         }
 
-        /* Navigation hover effects */
         nav a:hover {
-          color: #3B82F6 !important;
+          color: #4F8EFF !important;
         }
 
         nav a::after {
@@ -702,7 +713,7 @@ const BrandVDWebsite = () => {
           left: 0;
           width: 0;
           height: 2px;
-          background: #3B82F6;
+          background: #4F8EFF;
           transition: width 0.3s ease;
         }
 
@@ -710,71 +721,71 @@ const BrandVDWebsite = () => {
           width: 100%;
         }
 
-        /* CTA Button hover */
-        .cta-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5) !important;
+        nav img:hover {
+          transform: scale(1.05);
         }
 
-        /* Service card hover effects */
+        .cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(79, 142, 255, 0.5) !important;
+        }
+
         .service-card:hover {
           transform: translateY(-8px);
           box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12) !important;
         }
 
-        /* Vision/Mission card hover */
         .vm-card:hover {
           transform: translateY(-5px) scale(1.02);
           box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12) !important;
         }
 
-        /* Edge card hover */
         .edge-card:hover {
           background: rgba(255, 255, 255, 0.15) !important;
           transform: translateY(-5px);
           border-color: rgba(255, 255, 255, 0.3) !important;
         }
 
-        /* Client card hover */
         .client-card:hover {
           transform: scale(1.05);
           box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12) !important;
         }
 
-        /* Presence item hover */
         .presence-item:hover {
           transform: translateY(-5px);
-          border-color: #3B82F6 !important;
-          box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15) !important;
+          border-color: #4F8EFF !important;
+          box-shadow: 0 8px 25px rgba(79, 142, 255, 0.15) !important;
         }
 
-        /* Contact item hover */
         .contact-item:hover {
           transform: translateX(5px);
           box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
         }
 
-        /* Smooth scroll reveal */
         section {
           will-change: opacity, transform;
         }
 
-        /* Logo animation on scroll */
         @keyframes logoFloat {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-3px); }
         }
 
-        nav.scrolled .logo {
+        nav.scrolled .logo-container {
           animation: logoFloat 3s ease-in-out infinite;
         }
       `}</style>
 
       {/* Navigation */}
       <nav style={{...styles.nav, ...(scrolled ? styles.navScrolled : {})}}>
-        <div style={styles.logo}>BRAND VD</div>
+        <div style={styles.logoContainer} className="logo-container">
+          <img 
+            src={logoX} 
+            alt="Brand VD Communications" 
+            style={styles.logoImage}
+          />
+        </div>
         
-        {/* Mobile Menu Button */}
         <button 
           style={styles.mobileMenuButton}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -787,7 +798,6 @@ const BrandVDWebsite = () => {
           </div>
         </button>
 
-        {/* Desktop & Mobile Navigation */}
         <ul style={styles.navLinks}>
           <li style={styles.navLinkItem}><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} style={styles.navLink}>About</a></li>
           <li style={styles.navLinkItem}><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection('services'); }} style={styles.navLink}>Services</a></li>
@@ -799,6 +809,7 @@ const BrandVDWebsite = () => {
 
       {/* Hero Section */}
       <section style={styles.hero}>
+        <div style={styles.heroBrandWatermark}>BrandVD</div>
         <div style={styles.heroContent}>
           <h1 style={styles.heroTitle}>
             Building Brand Value With<br/>Dynamic Storytelling
@@ -873,14 +884,14 @@ const BrandVDWebsite = () => {
       >
         <h2 style={styles.sectionTitle}>Vision & Mission</h2>
         <div style={styles.vmGrid}>
-          <div style={{...styles.vmCard, borderLeftColor: '#3B82F6'}} className="vm-card">
+          <div style={{...styles.vmCard, borderLeftColor: '#4F8EFF'}} className="vm-card">
             <h3 style={styles.vmTitle}>Vision</h3>
             <p style={styles.vmText}>
               To become the most trusted communications partner for brands and leaders, shaping reputations 
               that influence industries, inspire communities, and create long-term impact.
             </p>
           </div>
-          <div style={{...styles.vmCard, borderLeftColor: '#10B981'}} className="vm-card">
+          <div style={{...styles.vmCard, borderLeftColor: '#15D690'}} className="vm-card">
             <h3 style={styles.vmTitle}>Mission</h3>
             <p style={styles.vmText}>
               To craft integrated communication that combines strategic insight, authentic storytelling, and 
@@ -1011,7 +1022,9 @@ const BrandVDWebsite = () => {
 
       {/* Footer */}
       <footer style={styles.footer}>
-        <p>&copy; 2026 BRAND VD. All rights reserved. Building Brand Value With Dynamic Storytelling.</p>
+        <div style={styles.footerContent}>
+          <p>&copy; 2026 BRANDVD. All rights reserved. Building Brand Value With Dynamic Storytelling.</p>
+        </div>
       </footer>
     </div>
   );
